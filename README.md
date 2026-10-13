@@ -16,41 +16,41 @@ See [experiment index](docs/experiments.md) for notebook descriptions, original 
 
 Requires **Python 3.10 or newer**. From the repository root:
 
-\x60\x60\x60bash
+```bash
 python -m pip install -e .
 python -m spiking_models --model lif --duration 200 --time-step 0.05 --amplitude 4 --onset 10
 python -m spiking_models --model eif --amplitude 4 --delta 1
 python -m spiking_models --model adex --amplitude 10 --spike-adaptation 1
 python -m spiking_models --model legacy_adaptive --amplitude 10
-\x60\x60\x60
+```
 
 The command prints JSON including spike count, spike times, and the observed spike rate. To generate a plot:
 
-\x60\x60\x60bash
+```bash
 python -m pip install -e ".[plot]"
 python -m spiking_models --model lif --output trace.png
-\x60\x60\x60
+```
 
 For reproducible random-input experiments:
 
-\x60\x60\x60bash
+```bash
 python -m spiking_models --model lif --random-max 20 --seed 42
-\x60\x60\x60
+```
 
-Physical parameter values and time units in the standalone Python solver follow **consistent abstract coursework units**. The Brian2 notebooks use Brian2 unit objects (such as \x60ms\x60, \x60mV\x60, \x60namp\x60) and are a separate experimental implementation, not interchangeable with the standalone solver.
+Physical parameter values and time units in the standalone Python solver follow **consistent abstract coursework units**. The Brian2 notebooks use Brian2 unit objects (such as `ms`, `mV`, `namp`) and are a separate experimental implementation, not interchangeable with the standalone solver.
 
 ## Work with the original notebooks
 
-\x60\x60\x60bash
+```bash
 python -m pip install -e ".[notebooks]"
 jupyter notebook notebooks/
-\x60\x60\x60
+```
 
-The original notebooks are **historical artifacts** and may contain interactive \x60input()\x60 calls, fixed parameter values, plots stored as cell outputs, and global Brian2 state. Re-executing them may be computationally expensive, yield different random results, or require further manual adaptation. They have been **moved, not rewritten**, to preserve the historical scientific work. The archival compressed submissions remain available under \x60archive/\x60.
+The original notebooks are **historical artifacts** and may contain interactive `input()` calls, fixed parameter values, plots stored as cell outputs, and global Brian2 state. Re-executing them may be computationally expensive, yield different random results, or require further manual adaptation. They have been **moved, not rewritten**, to preserve the historical scientific work. The archival compressed submissions remain available under `archive/`.
 
 ## Python API
 
-\x60\x60\x60python
+```python
 from spiking_models import NeuronParameters, SimulationSettings, simulate, step_current
 
 trace = simulate(
@@ -60,19 +60,19 @@ trace = simulate(
     current=step_current(amplitude=4, onset=10),
 )
 print(len(trace.spike_times), trace.firing_rate)
-\x60\x60\x60
+```
 
-\x60simulate\x60 accepts any callable that provides finite current samples, so model logic is decoupled from input generation. \x60uniform_current\x60 accepts an injected, seeded \x60random.Random\x60 instance. An optional plotting function is separate from the solver.
+`simulate` accepts any callable that provides finite current samples, so model logic is decoupled from input generation. `uniform_current` accepts an injected, seeded `random.Random` instance. An optional plotting function is separate from the solver.
 
-**Model fidelity note:** The original single-neuron notebooks include a nonstandard adaptation term proportional to the cumulative spike count. The \x60legacy_adaptive\x60 option retains that update rule; \x60adex\x60 follows the common instantaneous adaptation increment at each spike. Output timing and the frequency-current definition have also been clarified in the standalone solver. Do not assume numerical identity with the original notebooks without establishing a controlled regression baseline.
+**Model fidelity note:** The original single-neuron notebooks include a nonstandard adaptation term proportional to the cumulative spike count. The `legacy_adaptive` option retains that update rule; `adex` follows the common instantaneous adaptation increment at each spike. Output timing and the frequency-current definition have also been clarified in the standalone solver. Do not assume numerical identity with the original notebooks without establishing a controlled regression baseline.
 
 ## Quality and maintenance
 
-\x60\x60\x60bash
+```bash
 python -m pip install -e ".[dev]"
 python -m unittest discover -s tests -v
 ruff check src tests
-\x60\x60\x60
+```
 
 CI runs syntax checks, linting, unit tests, and a CLI smoke test on two supported Python versions. No external services, deployment, or Docker are needed for these research scripts. Architecture and source layout are described in [architecture](docs/architecture.md), and instructions for future contributors are in [AGENTS.md](AGENTS.md).
 
