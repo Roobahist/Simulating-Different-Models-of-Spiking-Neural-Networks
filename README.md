@@ -76,6 +76,8 @@ ruff check src tests
 
 CI runs syntax checks, linting, unit tests, and a CLI smoke test on two supported Python versions. No external services, deployment, or Docker are needed for these research scripts. Architecture and source layout are described in [architecture](docs/architecture.md), and instructions for future contributors are in [AGENTS.md](AGENTS.md).
 
+An [engineering audit](docs/engineering-audit.md) records what was verified and what remains historical or unvalidated.
+
 ## Known limitations
 
 - The Brian2 experiments are preserved as original notebooks, not yet extracted into a fully tested script-based network simulator.
