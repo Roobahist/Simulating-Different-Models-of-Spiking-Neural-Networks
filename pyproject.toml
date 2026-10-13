@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spiking-neural-models-coursework"
+version = "0.1.0"
+description = "Reproducible educational simulations of spiking neuron models"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Mojtaba Kanani"}]
+dependencies = []
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.8,<4"]
+notebooks = ["numpy>=1.26,<3", "matplotlib>=3.8,<4", "brian2>=2.6,<3", "notebook>=7,<8"]
+dev = ["ruff>=0.7,<1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
