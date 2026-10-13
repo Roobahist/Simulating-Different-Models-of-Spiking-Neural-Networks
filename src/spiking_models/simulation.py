@@ -4,10 +4,10 @@ The original adaptation equation is exposed as legacy_adaptive because it
 differs from standard adaptive exponential integrate-and-fire (AdEx).
 """
 
-from collections.abc import Callable, Iterable
-from dataclasses import dataclass, field
 import math
 import random
+from collections.abc import Callable, Iterable
+from dataclasses import dataclass, field
 from typing import Literal
 
 Model = Literal["lif", "eif", "adex", "legacy_adaptive"]

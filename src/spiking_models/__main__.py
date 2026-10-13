@@ -5,7 +5,11 @@ import json
 import random
 
 from .simulation import (
-    NeuronParameters, SimulationSettings, simulate, step_current, uniform_current,
+    NeuronParameters,
+    SimulationSettings,
+    simulate,
+    step_current,
+    uniform_current,
 )
 
 
